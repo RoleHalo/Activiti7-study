@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="Event-timer-beginning-MiddleTask" name="Event-timer-beginning-MiddleTask" isExecutable="true">
+    <documentation>事件-定时器-中间时间</documentation>
+    <startEvent id="startEvent1"></startEvent>
+    <userTask id="sid-C9626F12-F26C-40DC-9F0E-DA991893A15F" name="入库审批" activiti:assignee="zs">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://activiti.com/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <userTask id="sid-A77CB2DB-1A9B-423B-AD47-66A06E18C96E" name="出库审批" activiti:assignee="lisi">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://activiti.com/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+      </extensionElements>
+    </userTask>
+    <endEvent id="sid-E6BA22EA-5FCE-4AD3-A17A-7373FB95109F"></endEvent>
+    <sequenceFlow id="sid-EF887F17-AE3E-4708-856B-D1E7ACAF491C" sourceRef="startEvent1" targetRef="sid-C9626F12-F26C-40DC-9F0E-DA991893A15F"></sequenceFlow>
+    <intermediateCatchEvent id="sid-DB47D994-DA87-4268-BECA-D67C0DA8632B" name="入库审批后暂停一分钟自动跳转">
+      <timerEventDefinition>
+        <timeDuration>PT1M</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="sid-3F6E6CBF-2C31-445B-99C0-5A5402D0F875" sourceRef="sid-C9626F12-F26C-40DC-9F0E-DA991893A15F" targetRef="sid-DB47D994-DA87-4268-BECA-D67C0DA8632B"></sequenceFlow>
+    <sequenceFlow id="sid-797A4217-725B-4DFA-8DDB-CA5B547E40D4" sourceRef="sid-DB47D994-DA87-4268-BECA-D67C0DA8632B" targetRef="sid-A77CB2DB-1A9B-423B-AD47-66A06E18C96E"></sequenceFlow>
+    <sequenceFlow id="sid-A624F56E-84DC-4211-BDEA-3B5808D91019" sourceRef="sid-A77CB2DB-1A9B-423B-AD47-66A06E18C96E" targetRef="sid-E6BA22EA-5FCE-4AD3-A17A-7373FB95109F"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Event-timer-beginning-MiddleTask">
+    <bpmndi:BPMNPlane bpmnElement="Event-timer-beginning-MiddleTask" id="BPMNPlane_Event-timer-beginning-MiddleTask">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="105.0" y="176.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-C9626F12-F26C-40DC-9F0E-DA991893A15F" id="BPMNShape_sid-C9626F12-F26C-40DC-9F0E-DA991893A15F">
+        <omgdc:Bounds height="80.0" width="100.0" x="225.0" y="151.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-A77CB2DB-1A9B-423B-AD47-66A06E18C96E" id="BPMNShape_sid-A77CB2DB-1A9B-423B-AD47-66A06E18C96E">
+        <omgdc:Bounds height="80.0" width="100.0" x="555.0" y="151.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-E6BA22EA-5FCE-4AD3-A17A-7373FB95109F" id="BPMNShape_sid-E6BA22EA-5FCE-4AD3-A17A-7373FB95109F">
+        <omgdc:Bounds height="28.0" width="28.0" x="779.5" y="177.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-DB47D994-DA87-4268-BECA-D67C0DA8632B" id="BPMNShape_sid-DB47D994-DA87-4268-BECA-D67C0DA8632B">
+        <omgdc:Bounds height="31.0" width="31.0" x="420.0" y="175.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-EF887F17-AE3E-4708-856B-D1E7ACAF491C" id="BPMNEdge_sid-EF887F17-AE3E-4708-856B-D1E7ACAF491C">
+        <omgdi:waypoint x="135.0" y="191.0"></omgdi:waypoint>
+        <omgdi:waypoint x="225.0" y="191.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-3F6E6CBF-2C31-445B-99C0-5A5402D0F875" id="BPMNEdge_sid-3F6E6CBF-2C31-445B-99C0-5A5402D0F875">
+        <omgdi:waypoint x="325.0" y="191.1552795031056"></omgdi:waypoint>
+        <omgdi:waypoint x="420.000077156959" y="191.4503107986241"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-797A4217-725B-4DFA-8DDB-CA5B547E40D4" id="BPMNEdge_sid-797A4217-725B-4DFA-8DDB-CA5B547E40D4">
+        <omgdi:waypoint x="451.9999299749004" y="191.45266292906834"></omgdi:waypoint>
+        <omgdi:waypoint x="555.0" y="191.14792899408283"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-A624F56E-84DC-4211-BDEA-3B5808D91019" id="BPMNEdge_sid-A624F56E-84DC-4211-BDEA-3B5808D91019">
+        <omgdi:waypoint x="655.0" y="191.0"></omgdi:waypoint>
+        <omgdi:waypoint x="779.5" y="191.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/contex http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--测试 方法表达式 获取bean-->
+    <bean class="com.lm.activiti7study.service.MyBean" name="myBean"></bean>
+
+
+    <!--activiti单独运行的ProcessEngine配置对象(processEngineConfiguration),使用单独启动方式
+            默认情况下：bean的id=processEngineConfiguration
+        -->
+    <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+    <property name="jdbcDriver" value="com.mysql.cj.jdbc.Driver"></property>
+    <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3308/activiti?nullCatalogMeansCurrent=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=GMT%2B8"></property>
+    <property name="jdbcUsername" value="root"></property>
+    <property name="jdbcPassword" value="mysql1225"></property>
+    <!--数据库生成策略-->
+    <!--activiti在生成表的时候,true 表示数据库中如果已经存在,那么直接使用,如果不存在,则直接创建-->
+    <property name="databaseSchemaUpdate" value="true"></property>
+    <!--开启异步执行  测试定时器时部署操作和执行操作需要一起 否则部署完成之后定时器会消失-->
+    <property name="asyncExecutorActivate" value="true"></property>
+    </bean>
+
+<!--    &lt;!&ndash;数据库连接池的构造注入&ndash;&gt;-->
+<!--    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
+<!--        <property name="url" value="jdbc:mysql://127.0.0.1:3308/activiti?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=GMT%2B8"></property>-->
+<!--        <property name="username" value="root"></property>-->
+<!--        <property name="password" value="mysql1225"></property>-->
+<!--        <property name="maxActive" value="30"></property>-->
+<!--        <property name="minIdle" value="5"></property>-->
+
+<!--    </bean>-->
+<!--    <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">-->
+<!--        &lt;!&ndash;代表数据源&ndash;&gt;-->
+<!--        <property name="dataSource" ref="dataSource"></property>-->
+<!--        &lt;!&ndash;代表是否生成表结构&ndash;&gt;-->
+<!--        <property name="databaseSchemaUpdate" value="true"/>-->
+<!--    </bean>-->
+
+</beans>

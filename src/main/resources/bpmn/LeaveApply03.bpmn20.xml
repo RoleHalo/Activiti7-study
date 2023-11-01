@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" id="Definitions_0001" targetNamespace="http://bpmn.io/schema/bpmn">
+<!--  方法表达式测试-->
+  <bpmn:process id="MyLeave" name="请假审批流程" isExecutable="true">
+    <bpmn:startEvent id="Event_1npuhot">
+      <bpmn:outgoing>Flow_1lbcizu</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="ManagerApproval" name="经理审批">
+      <bpmn:extensionElements>
+        <activiti:properties>
+          <activiti:property name="111" value="1231"/>
+        </activiti:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0fqfm8c</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sc5fjz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1jao5cx">
+      <bpmn:incoming>Flow_0sc5fjz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1lbcizu" sourceRef="Event_1npuhot" targetRef="EmployeeLeaveApply"/>
+    <bpmn:sequenceFlow id="Flow_0sc5fjz" sourceRef="ManagerApproval" targetRef="Event_1jao5cx"/>
+    <bpmn:userTask id="HRApproval" name="人事审批">
+      <bpmn:extensionElements>
+        <activiti:properties>
+          <activiti:property name="111" value="1231"/>
+        </activiti:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1otxzjp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fqfm8c</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="EmployeeLeaveApply" name="员工提交请假申请" activiti:assignee="${myBean.getAssignee()}">
+      <bpmn:extensionElements>
+        <activiti:properties>
+          <activiti:property name="111" value="1231"/>
+        </activiti:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1lbcizu</bpmn:incoming>
+      <bpmn:outgoing>Flow_1otxzjp</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1otxzjp" sourceRef="EmployeeLeaveApply" targetRef="HRApproval"/>
+    <bpmn:sequenceFlow id="Flow_0fqfm8c" sourceRef="HRApproval" targetRef="ManagerApproval"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MyLeave">
+      <bpmndi:BPMNShape id="Event_1jao5cx_di" bpmnElement="Event_1jao5cx">
+        <dc:Bounds x="792" y="302" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0un6cm5_di" bpmnElement="EmployeeLeaveApply">
+        <dc:Bounds x="220" y="260" width="120" height="120"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1npuhot_di" bpmnElement="Event_1npuhot">
+        <dc:Bounds x="142" y="302" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1dmhi2t_di" bpmnElement="HRApproval">
+        <dc:Bounds x="400" y="260" width="120" height="120"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xlvtvv_di" bpmnElement="ManagerApproval">
+        <dc:Bounds x="600" y="260" width="120" height="120"/>
+        <bpmndi:BPMNLabel/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1lbcizu_di" bpmnElement="Flow_1lbcizu">
+        <di:waypoint x="178" y="320"/>
+        <di:waypoint x="220" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0sc5fjz_di" bpmnElement="Flow_0sc5fjz">
+        <di:waypoint x="720" y="320"/>
+        <di:waypoint x="792" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fqfm8c_di" bpmnElement="Flow_0fqfm8c">
+        <di:waypoint x="520" y="320"/>
+        <di:waypoint x="600" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1otxzjp_di" bpmnElement="Flow_1otxzjp">
+        <di:waypoint x="340" y="320"/>
+        <di:waypoint x="400" y="320"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
